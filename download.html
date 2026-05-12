@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Synap - 下载</title>
+    <style>
+        @font-face {
+            font-family: 'MiSans';
+            src: url('https://cdn.jsdelivr.net/gh/TrionesType/misans@latest/Web/Woff2/MiSans-Semibold.woff2') format('woff2');
+            font-weight: 600;
+            font-style: normal;
+            font-display: swap;
+        }
+
+        @font-face {
+            font-family: 'MiSans';
+            src: url('https://cdn.jsdelivr.net/gh/TrionesType/misans@latest/Web/Woff2/MiSans-Regular.woff2') format('woff2');
+            font-weight: 400;
+            font-style: normal;
+            font-display: swap;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            min-height: 100vh;
+            background: #0a0a0a;
+            font-family: 'MiSans', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: #fff;
+        }
+
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 100;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.5rem 3rem;
+            background: rgba(10, 10, 10, 0.95);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .nav-logo {
+            font-size: 1.5rem;
+            font-weight: 600;
+            background: linear-gradient(90deg, #00d4ff, #7b2ff7);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            cursor: pointer;
+            text-decoration: none;
+        }
+
+        .nav-btns {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .nav-btn {
+            font-family: 'MiSans', sans-serif;
+            font-weight: 600;
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.7);
+            background: transparent;
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            padding: 0.6rem 1.6rem;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+
+        .nav-btn:hover {
+            color: #fff;
+            border-color: rgba(123, 47, 247, 0.6);
+            box-shadow: 0 0 20px rgba(123, 47, 247, 0.3);
+        }
+
+        .nav-btn.active {
+            background: linear-gradient(135deg, rgba(123, 47, 247, 0.4), rgba(0, 212, 255, 0.4));
+            border-color: rgba(123, 47, 247, 0.5);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 8rem 2rem 4rem;
+        }
+
+        .hero {
+            text-align: center;
+            margin-bottom: 4rem;
+            animation: fadeInUp 0.8s ease-out;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            background: linear-gradient(90deg, #00d4ff, #7b2ff7, #ff006e);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero p {
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 1.1rem;
+        }
+
+        .platform-tabs {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 3rem;
+            animation: fadeInUp 0.8s ease-out 0.1s both;
+        }
+
+        .platform-tab {
+            font-family: 'MiSans', sans-serif;
+            font-weight: 600;
+            font-size: 1rem;
+            padding: 0.8rem 2rem;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            color: rgba(255, 255, 255, 0.6);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .platform-tab:hover {
+            background: rgba(255, 255, 255, 0.1);
+            color: #fff;
+        }
+
+        .platform-tab.active {
+            background: linear-gradient(135deg, rgba(123, 47, 247, 0.3), rgba(0, 212, 255, 0.3));
+            border-color: rgba(123, 47, 247, 0.5);
+            color: #fff;
+            box-shadow: 0 0 30px rgba(123, 47, 247, 0.2);
+        }
+
+        .releases-list {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+        .release-card {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 16px;
+            padding: 2rem;
+            transition: all 0.3s ease;
+            animation: fadeInUp 0.8s ease-out both;
+        }
+
+        .release-card:hover {
+            background: rgba(255, 255, 255, 0.05);
+            border-color: rgba(123, 47, 247, 0.3);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .release-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 1.5rem;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .release-info {
+            flex: 1;
+        }
+
+        .release-version {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: #fff;
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            flex-wrap: wrap;
+        }
+
+        .release-badge {
+            font-size: 0.75rem;
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-weight: 600;
+        }
+
+        .badge-pre-release {
+            background: rgba(255, 183, 0, 0.2);
+            color: #ffb700;
+            border: 1px solid rgba(255, 183, 0, 0.3);
+        }
+
+        .badge-android {
+            background: rgba(61, 220, 132, 0.2);
+            color: #3ddc84;
+            border: 1px solid rgba(61, 220, 132, 0.3);
+        }
+
+        .badge-windows {
+            background: rgba(0, 120, 212, 0.2);
+            color: #0078d4;
+            border: 1px solid rgba(0, 120, 212, 0.3);
+        }
+
+        .badge-linux {
+            background: rgba(255, 165, 0, 0.2);
+            color: #ffa500;
+            border: 1px solid rgba(255, 165, 0, 0.3);
+        }
+
+        .release-date {
+            color: rgba(255, 255, 255, 0.4);
+            font-size: 0.9rem;
+        }
+
+        .release-changes {
+            list-style: none;
+            margin-bottom: 1.5rem;
+        }
+
+        .release-changes li {
+            position: relative;
+            padding-left: 1.5rem;
+            margin-bottom: 0.75rem;
+            color: rgba(255, 255, 255, 0.7);
+            line-height: 1.6;
+        }
+
+        .release-changes li::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0.6rem;
+            width: 6px;
+            height: 6px;
+            background: #7b2ff7;
+            border-radius: 50%;
+        }
+
+        .release-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .release-contributors {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .contributors-label {
+            color: rgba(255, 255, 255, 0.4);
+            font-size: 0.85rem;
+        }
+
+        .contributor-avatar {
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            border: 2px solid rgba(123, 47, 247, 0.3);
+            transition: transform 0.2s ease;
+        }
+
+        .contributor-avatar:hover {
+            transform: scale(1.1);
+        }
+
+        .release-actions {
+            display: flex;
+            gap: 0.75rem;
+        }
+
+        .btn-download {
+            font-family: 'MiSans', sans-serif;
+            font-weight: 600;
+            font-size: 0.9rem;
+            padding: 0.7rem 1.5rem;
+            background: linear-gradient(135deg, #7b2ff7, #00d4ff);
+            border: none;
+            border-radius: 8px;
+            color: #fff;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+
+        .btn-download:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(123, 47, 247, 0.4);
+        }
+
+        .btn-secondary {
+            font-family: 'MiSans', sans-serif;
+            font-weight: 600;
+            font-size: 0.9rem;
+            padding: 0.7rem 1.5rem;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: 8px;
+            color: rgba(255, 255, 255, 0.7);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.1);
+            color: #fff;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .grid-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
+            background-size: 60px 60px;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .container {
+            position: relative;
+            z-index: 10;
+        }
+
+        .loading {
+            text-align: center;
+            padding: 3rem;
+            color: rgba(255, 255, 255, 0.5);
+        }
+
+        .error {
+            text-align: center;
+            padding: 3rem;
+            color: #ff006e;
+        }
+
+        @media (max-width: 768px) {
+            .navbar {
+                padding: 1rem 1.5rem;
+            }
+
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .release-header {
+                flex-direction: column;
+            }
+
+            .release-footer {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="grid-overlay"></div>
+    
+    <nav class="navbar">
+        <a href="index.html" class="nav-logo">Synap</a>
+        <div class="nav-btns">
+            <a href="download.html" class="nav-btn active">下载</a>
+            <a href="#" class="nav-btn">设置</a>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="hero">
+            <h1>下载 Synap</h1>
+            <p>选择您的平台，开始使用 Synap 笔记应用</p>
+        </div>
+
+        <div class="platform-tabs">
+            <button class="platform-tab active" data-platform="all">全部</button>
+            <button class="platform-tab" data-platform="android">Android</button>
+            <button class="platform-tab" data-platform="windows">Windows</button>
+            <button class="platform-tab" data-platform="linux">Linux</button>
+        </div>
+
+        <div class="releases-list" id="releasesList">
+            <div class="loading">加载中...</div>
+        </div>
+    </div>
+
+    <script>
+        const avatarMap = {
+            "yyckn": "https://avatars.githubusercontent.com/u/189811683?s=64&v=4",
+            "Fuwaki": "https://avatars.githubusercontent.com/u/52279718?s=64&v=4",
+            "KitraMGP": "https://avatars.githubusercontent.com/u/44922707?s=64&v=4"
+        };
+
+        const platformNames = {
+            "android": "Android",
+            "windows": "Windows",
+            "linux": "Linux"
+        };
+
+        const releaseUrlMap = {
+            "android-v1.0.0-alpha.8": "https://github.com/VilinkoStudio/Synap/releases/tag/android-v1.0.0-alpha.8",
+            "android-v1.0.0-alpha.7": "https://github.com/VilinkoStudio/Synap/releases/tag/android-v1.0.0-alpha.7",
+            "desktop-linux-v1.0.0-alpha.1": "https://github.com/VilinkoStudio/Synap/releases/tag/desktop-linux-v1.0.0-alpha.1",
+            "android-v1.0.0-alpha.6": "https://github.com/VilinkoStudio/Synap/releases/tag/android-v1.0.0-alpha.6",
+            "android-v1.0.0-alpha.5": "https://github.com/VilinkoStudio/Synap/releases/tag/android-v1.0.0-alpha.5",
+            "desktop-v1.0.0-alpha.1": "https://github.com/VilinkoStudio/Synap/releases/tag/android-v1.0.0-alpha.4",
+            "android-v1.0.0-alpha.3": "https://github.com/VilinkoStudio/Synap/releases/tag/android-v1.0.0-alpha.3",
+            "android-v1.0.0-alpha.2": "https://github.com/VilinkoStudio/Synap/releases/tag/android-v1.0.0-alpha.2",
+            "android-v1.0.0-alpha.1": "https://github.com/VilinkoStudio/Synap/releases/tag/android-v1.0.0-alpha.1"
+        };
+
+        let releasesData = null;
+
+        async function loadReleases() {
+            try {
+                const response = await fetch('releases.json');
+                if (!response.ok) throw new Error('加载失败');
+                releasesData = await response.json();
+                renderReleases();
+            } catch (error) {
+                document.getElementById('releasesList').innerHTML = 
+                    `<div class="error">加载失败: ${error.message}</div>`;
+            }
+        }
+
+        function renderReleases(platform = 'all') {
+            const container = document.getElementById('releasesList');
+            
+            if (!releasesData) {
+                container.innerHTML = '<div class="loading">加载中...</div>';
+                return;
+            }
+
+            const filteredReleases = platform === 'all' 
+                ? releasesData.releases 
+                : releasesData.releases.filter(r => r.platform === platform);
+
+            container.innerHTML = filteredReleases.map((release, index) => `
+                <div class="release-card" style="animation-delay: ${index * 0.1}s">
+                    <div class="release-header">
+                        <div class="release-info">
+                            <div class="release-version">
+                                ${release.version}
+                                <span class="release-badge badge-${release.type}">Pre-release</span>
+                                <span class="release-badge badge-${release.platform}">${platformNames[release.platform]}</span>
+                            </div>
+                            <div class="release-date">${release.date}</div>
+                        </div>
+                    </div>
+                    <ul class="release-changes">
+                        ${release.changes.map(change => `<li>${change}</li>`).join('')}
+                    </ul>
+                    <div class="release-footer">
+                        <div class="release-contributors">
+                            <span class="contributors-label">贡献者：</span>
+                            ${release.contributors.map(c => `
+                                <a href="https://github.com/${c}" target="_blank" title="${c}">
+                                    <img class="contributor-avatar" src="${avatarMap[c] || `https://github.com/identicons/${c}.png`}" alt="${c}">
+                                </a>
+                            `).join('')}
+                        </div>
+                        <div class="release-actions">
+                            <a href="${releaseUrlMap[release.version] || '#'}" target="_blank" class="btn-download">下载</a>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        document.querySelectorAll('.platform-tab').forEach(tab => {
+            tab.addEventListener('click', () => {
+                document.querySelectorAll('.platform-tab').forEach(t => t.classList.remove('active'));
+                tab.classList.add('active');
+                renderReleases(tab.dataset.platform);
+            });
+        });
+
+        loadReleases();
+    </script>
+</body>
+</html>
