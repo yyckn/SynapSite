@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SynapSite</title>
+    <style>
+        @font-face {
+            font-family: 'MiSans';
+            src: url('https://cdn.jsdelivr.net/gh/TrionesType/misans@latest/Web/Woff2/MiSans-Semibold.woff2') format('woff2');
+            font-weight: 600;
+            font-style: normal;
+            font-display: swap;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: #0a0a0a;
+            overflow: hidden;
+            font-family: 'MiSans', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        .container {
+            position: relative;
+            z-index: 10;
+        }
+
+        .title {
+            font-family: 'MiSans', sans-serif;
+            font-size: 8rem;
+            font-weight: 600;
+            letter-spacing: 0.3em;
+            background: linear-gradient(90deg, #00d4ff, #7b2ff7, #ff006e, #00d4ff);
+            background-size: 300% 100%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: gradientShift 4s ease infinite, fadeInUp 1.2s ease-out;
+            position: relative;
+        }
+
+        .title::after {
+            content: 'Synap';
+            position: absolute;
+            left: 0;
+            top: 0;
+            background: linear-gradient(90deg, #00d4ff, #7b2ff7, #ff006e, #00d4ff);
+            background-size: 300% 100%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            filter: blur(30px);
+            opacity: 0.6;
+            animation: gradientShift 4s ease infinite, pulse 2s ease-in-out infinite;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 1.2rem;
+            letter-spacing: 1em;
+            margin-top: 1rem;
+            animation: fadeInUp 1.2s ease-out 0.3s both;
+        }
+
+        @keyframes gradientShift {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(40px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes pulse {
+            0%, 100% { filter: blur(30px); opacity: 0.6; }
+            50% { filter: blur(50px); opacity: 0.8; }
+        }
+
+        .particle {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: white;
+            border-radius: 50%;
+            animation: float linear infinite;
+            opacity: 0;
+        }
+
+        @keyframes float {
+            0% {
+                opacity: 0;
+                transform: translateY(100vh) scale(0);
+            }
+            10% {
+                opacity: 1;
+            }
+            90% {
+                opacity: 1;
+            }
+            100% {
+                opacity: 0;
+                transform: translateY(-100vh) scale(1);
+            }
+        }
+
+        .orbit {
+            position: absolute;
+            border: 1px solid rgba(123, 47, 247, 0.2);
+            border-radius: 50%;
+            animation: rotate linear infinite;
+        }
+
+        .orbit:nth-child(1) {
+            width: 300px;
+            height: 300px;
+            top: -150px;
+            left: -150px;
+            animation-duration: 8s;
+        }
+
+        .orbit:nth-child(2) {
+            width: 500px;
+            height: 500px;
+            top: -250px;
+            left: -250px;
+            animation-duration: 12s;
+            animation-direction: reverse;
+        }
+
+        .orbit:nth-child(3) {
+            width: 700px;
+            height: 700px;
+            top: -350px;
+            left: -350px;
+            animation-duration: 16s;
+        }
+
+        .orbit::after {
+            content: '';
+            position: absolute;
+            width: 8px;
+            height: 8px;
+            background: #7b2ff7;
+            border-radius: 50%;
+            top: -4px;
+            left: 50%;
+            box-shadow: 0 0 20px #7b2ff7, 0 0 40px #7b2ff7;
+        }
+
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .grid-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
+            background-size: 60px 60px;
+            animation: gridMove 20s linear infinite;
+        }
+
+        @keyframes gridMove {
+            0% { transform: perspective(500px) rotateX(60deg) translateY(0); }
+            100% { transform: perspective(500px) rotateX(60deg) translateY(60px); }
+        }
+
+        .glow-line {
+            position: fixed;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, #00d4ff, transparent);
+            animation: scanLine 3s linear infinite;
+            opacity: 0.4;
+        }
+
+        @keyframes scanLine {
+            0% { top: -2px; left: 0; width: 100%; }
+            100% { top: 100%; left: 0; width: 100%; }
+        }
+    </style>
+</head>
+<body>
+    <div class="grid-overlay"></div>
+    <div class="glow-line"></div>
+    
+    <div class="orbit-container">
+        <div class="orbit"></div>
+        <div class="orbit"></div>
+        <div class="orbit"></div>
+    </div>
+
+    <div class="container">
+        <div class="title">Synap</div>
+        <div class="subtitle">NEURAL NETWORK</div>
+    </div>
+
+    <script>
+        function createParticles() {
+            const body = document.body;
+            for (let i = 0; i < 50; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                particle.style.left = Math.random() * 100 + 'vw';
+                particle.style.animationDuration = (Math.random() * 10 + 5) + 's';
+                particle.style.animationDelay = (Math.random() * 10) + 's';
+                particle.style.width = particle.style.height = (Math.random() * 4 + 2) + 'px';
+                
+                const colors = ['#00d4ff', '#7b2ff7', '#ff006e'];
+                particle.style.background = colors[Math.floor(Math.random() * colors.length)];
+                particle.style.boxShadow = `0 0 10px ${particle.style.background}`;
+                
+                body.appendChild(particle);
+            }
+        }
+
+        createParticles();
+    </script>
+</body>
+</html>
