@@ -6,6 +6,8 @@
       "type": "pre-release",
       "platform": "android",
       "commit": "bd5cb22",
+      "download_platform": "Github",
+      "download_src": "https://github.com/VilinkoStudio/Synap/releases/tag/android-v1.0.0-alpha.8",
       "changes": [
         "增加笔记颜色功能：可为单个笔记设置不同颜色标记；可手动新增预设颜色；标签栏可以筛选颜色标记",
         "增加草稿箱功能：支持自动保存到草稿箱中，若意外退出而未保存的笔记下次打开时会弹窗提示进行保存；退出编辑页时提示是否保存",
@@ -21,6 +23,8 @@
       "type": "pre-release",
       "platform": "android",
       "commit": "ba8bbdc",
+      "download_platform": "Github",
+      "download_src": "https://github.com/VilinkoStudio/Synap/releases/tag/android-v1.0.0-alpha.7",
       "changes": [
         "增加AI相关设置入口，包括：增加AI模型（可填写兼容OpenAI的自定义模型或使用预设模型），管理AI功能可以应用在哪些场景",
         "新增星图功能",
@@ -34,6 +38,8 @@
       "type": "pre-release",
       "platform": "linux",
       "commit": "4c0448f",
+      "download_platform": "Github",
+      "download_src": "https://github.com/VilinkoStudio/Synap/releases/tag/desktop-linux-v1.0.0-alpha.1",
       "changes": [
         "完成基于GTK4的Linux桌面端"
       ],
@@ -45,6 +51,8 @@
       "type": "pre-release",
       "platform": "android",
       "commit": "15b0ba2",
+      "download_platform": "Github",
+      "download_src": "https://github.com/VilinkoStudio/Synap/releases/tag/android-v1.0.0-alpha.6",
       "changes": [
         "编辑页面支持 Markdown 实时渲染，编辑即可实时预览格式效果",
         "增加首页和编辑页在大屏下的布局适配",
@@ -59,6 +67,8 @@
       "type": "pre-release",
       "platform": "android",
       "commit": "4f93491",
+      "download_platform": "Github",
+      "download_src": "https://github.com/VilinkoStudio/Synap/releases/tag/android-v1.0.0-alpha.5",
       "changes": [
         "增加同步功能(beta)，支持局域网配对并连接设备",
         "设置页UI修复：去除设置的无障碍选项，同步和备份与恢复合并为备份与同步",
@@ -74,6 +84,8 @@
       "type": "pre-release",
       "platform": "windows",
       "commit": "e39bd11",
+      "download_platform": "Github",
+      "download_src": "https://github.com/VilinkoStudio/Synap/releases/tag/android-v1.0.0-alpha.4",
       "changes": [
         "首个桌面端版本"
       ],
@@ -85,6 +97,8 @@
       "type": "pre-release",
       "platform": "android",
       "commit": "45f9b14",
+      "download_platform": "Github",
+      "download_src": "https://github.com/VilinkoStudio/Synap/releases/tag/android-v1.0.0-alpha.3",
       "changes": [
         "增加一键记笔记小组件等四种快捷记笔记方式",
         "包括：一键记笔记小组件、Android控制中心快捷卡片、系统分享菜单（仅限分享纯文本时）、系统选取文字菜单"
@@ -97,6 +111,8 @@
       "type": "pre-release",
       "platform": "android",
       "commit": "bd93138",
+      "download_platform": "Github",
+      "download_src": "https://github.com/VilinkoStudio/Synap/releases/tag/android-v1.0.0-alpha.2",
       "changes": [
         "增加笔记分享功能",
         "重新调整编辑页的UI",
@@ -110,6 +126,8 @@
       "type": "pre-release",
       "platform": "android",
       "commit": "ea24a90",
+      "download_platform": "Github",
+      "download_src": "https://github.com/VilinkoStudio/Synap/releases/tag/android-v1.0.0-alpha.1",
       "changes": [
         "建立项目骨架，实现笔记存储、服务、搜索、同步等底层核心逻辑，增加安卓端UI核心界面",
         "重新设计搜索、设置部分的UI，增加app图标",
